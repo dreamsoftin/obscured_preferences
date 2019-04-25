@@ -1,15 +1,24 @@
 # obscured_preferences
 
-A new Flutter package project.
+This package makes use of [shared_preferences](https://pub.dartlang.org/packages/shared_preferences) and [encrypt](https://pub.dartlang.org/packages/encrypt) packages to provide encrypted shared preferences.
 
-## Getting Started
+## Usage
 
-This project is a starting point for a Dart
-[package](https://flutter.io/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+The syntax and usage of this package is the same as that of [shared_preferences](https://pub.dartlang.org/packages/shared_preferences).
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
-# obscured_preferences
+```dart
+import 'package:flutter/material.dart';
+import 'package:obscured_preferences/obscured_preferences.dart';
+
+
+void savePrefs() async {
+
+    ObscuredPrefs prefs = await ObscuredPrefs.getInstance();
+
+    await prefs.setString('key', 'Hello World!');
+
+    final strValue = prefs.getString('key');
+}
+```
+
+

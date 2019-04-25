@@ -43,8 +43,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.14.11"
-  encrypt:
+  cupertino_icons:
     dependency: "direct main"
+    description:
+      name: cupertino_icons
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.2"
+  encrypt:
+    dependency: transitive
     description:
       name: encrypt
       url: "https://pub.dartlang.org"
@@ -74,6 +81,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.6"
+  obscured_preferences:
+    dependency: "direct main"
+    description:
+      path: ".."
+      relative: true
+    source: path
+    version: "0.1.0"
   path:
     dependency: transitive
     description:
@@ -103,7 +117,7 @@ packages:
     source: hosted
     version: "2.0.1"
   shared_preferences:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: shared_preferences
       url: "https://pub.dartlang.org"
