@@ -29,9 +29,9 @@ class ObscuredPrefs {
     return _prefs.clear();
   }
 
-  bool containsKey(String key) {
-    return _prefs.containsKey(key);
-  }
+  // bool containsKey(String key) {
+  //   return _prefs.containsKey(key);
+  // }
 
   dynamic get(String key) {
     return _prefs.get(key);
