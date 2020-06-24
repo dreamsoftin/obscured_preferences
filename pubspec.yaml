@@ -1,7 +1,6 @@
 name: obscured_preferences
 description: The package uses shared_preferences and encrypt packages to encrypt values stored in shared preferences.
 version: 0.1.0
-author: Dreamsoft
 homepage: https://github.com/dreamsoftin/obscured_preferences
 
 environment:
@@ -10,8 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  encrypt: ^3.0.0
-  shared_preferences: ^0.5.6
+  encrypt: ^4.0.2
+  shared_preferences: '>=0.5.0 <2.0.0'
 
 dev_dependencies:
   flutter_test:
