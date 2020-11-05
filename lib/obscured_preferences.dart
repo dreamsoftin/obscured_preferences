@@ -80,26 +80,46 @@ class ObscuredPrefs {
   }
 
   Future<bool> setBool(String key, bool value) async {
+    if (value == null) {
+      remove(key);
+      return null;
+    }
     final encryptedValue = _encrypter.encrypt(value.toString(), iv: _iv).base16;
     return _prefs.setString(key, encryptedValue);
   }
 
   Future<bool> setDouble(String key, double value) async {
+    if (value == null) {
+      remove(key);
+      return null;
+    }
     final encryptedValue = _encrypter.encrypt(value.toString(), iv: _iv).base16;
     return _prefs.setString(key, encryptedValue);
   }
 
   Future<bool> setInt(String key, int value) async {
+    if (value == null) {
+      remove(key);
+      return null;
+    }
     final encryptedValue = _encrypter.encrypt(value.toString(), iv: _iv).base16;
     return _prefs.setString(key, encryptedValue);
   }
 
   Future<bool> setString(String key, String value) async {
+    if (value == null) {
+      remove(key);
+      return null;
+    }
     final encryptedValue = _encrypter.encrypt(value, iv: _iv).base16;
     return _prefs.setString(key, encryptedValue);
   }
 
   Future<bool> setStringList(String key, List<String> value) async {
+    if (value == null) {
+      remove(key);
+      return null;
+    }
     final List<String> encryptedValues =
         value.map((v) => _encrypter.encrypt(v, iv: _iv).base16).toList();
     return _prefs.setStringList(key, encryptedValues);
