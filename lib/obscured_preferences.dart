@@ -4,12 +4,12 @@ import 'package:encrypt/encrypt.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ObscuredPrefs {
-  static ObscuredPrefs _instance;
+  static ObscuredPrefs? _instance;
 
-  static SharedPreferences _prefs;
-  static Key _key;
-  static IV _iv;
-  static Encrypter _encrypter;
+  static late SharedPreferences _prefs;
+  static late Key _key;
+  static IV? _iv;
+  static late Encrypter _encrypter;
 
   static Future<ObscuredPrefs> getInstance({keyLength = 16}) async {
     if (_instance == null) {
@@ -22,7 +22,7 @@ class ObscuredPrefs {
       _instance = ObscuredPrefs();
     }
 
-    return _instance;
+    return _instance!;
   }
 
   Future<bool> clear() async {
@@ -37,19 +37,19 @@ class ObscuredPrefs {
     return _prefs.get(key);
   }
 
-  bool getBool(String key) {
+  bool? getBool(String key) {
     final value = _prefs.getString(key);
     if (value == null) return null;
     return _encrypter.decrypt16(value, iv: _iv).contains("true");
   }
 
-  double getDouble(String key) {
+  double? getDouble(String key) {
     final value = _prefs.getString(key);
     if (value == null) return null;
     return double.tryParse(_encrypter.decrypt16(value, iv: _iv));
   }
 
-  int getInt(String key) {
+  int? getInt(String key) {
     final value = _prefs.getString(key);
     if (value == null) return null;
     return int.tryParse(_encrypter.decrypt16(value, iv: _iv));
@@ -59,13 +59,13 @@ class ObscuredPrefs {
     return _prefs.getKeys();
   }
 
-  String getString(String key) {
+  String? getString(String key) {
     final value = _prefs.getString(key);
     if (value == null) return null;
     return _encrypter.decrypt16(value, iv: _iv);
   }
 
-  List<String> getStringList(String key) {
+  List<String>? getStringList(String key) {
     final value = _prefs.getStringList(key);
     if (value == null) return null;
 
@@ -80,46 +80,26 @@ class ObscuredPrefs {
   }
 
   Future<bool> setBool(String key, bool value) async {
-    if (value == null) {
-      remove(key);
-      return null;
-    }
     final encryptedValue = _encrypter.encrypt(value.toString(), iv: _iv).base16;
     return _prefs.setString(key, encryptedValue);
   }
 
   Future<bool> setDouble(String key, double value) async {
-    if (value == null) {
-      remove(key);
-      return null;
-    }
     final encryptedValue = _encrypter.encrypt(value.toString(), iv: _iv).base16;
     return _prefs.setString(key, encryptedValue);
   }
 
   Future<bool> setInt(String key, int value) async {
-    if (value == null) {
-      remove(key);
-      return null;
-    }
     final encryptedValue = _encrypter.encrypt(value.toString(), iv: _iv).base16;
     return _prefs.setString(key, encryptedValue);
   }
 
   Future<bool> setString(String key, String value) async {
-    if (value == null) {
-      remove(key);
-      return null;
-    }
     final encryptedValue = _encrypter.encrypt(value, iv: _iv).base16;
     return _prefs.setString(key, encryptedValue);
   }
 
   Future<bool> setStringList(String key, List<String> value) async {
-    if (value == null) {
-      remove(key);
-      return null;
-    }
     final List<String> encryptedValues =
         value.map((v) => _encrypter.encrypt(v, iv: _iv).base16).toList();
     return _prefs.setStringList(key, encryptedValues);
